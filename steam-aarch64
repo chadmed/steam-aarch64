@@ -11,25 +11,33 @@ else
     DATA_DIR="${HOME}"/.local/share/
 fi
 
+if [[ -e /usr/bin/kdialog ]]; then
+    DLG=kdialog
+    INFO="${DLG} --msgbox"
+    WARN="${DLG} --sorry"
+    ERR="${DLG} --error"
+else
+    DLG=zenity
+    INFO="${DLG} --info --text"
+    WARN="${DLG} --warning --text"
+    ERR="${DLG} --error --text"
+fi
+
 if [[ ! -d "${DATA_DIR}"/Steam ]]; then
-    zenity --info \
-        --text "This is your first time launching Steam on AArch64. Steam can take 5+ minutes to launch. If you encounter issues, please launch steam-aarch64 in a terminal to debug."
+    $INFO "This is your first time launching Steam on AArch64. Steam can take 5+ minutes to launch. If you encounter issues, please launch steam-aarch64 in a terminal to debug."
     if [[ ${PAGE_SIZE} != 4096 ]]; then
-        zenity --warning \
-            --text "muvm will be used to start Steam, as your system's page size is ${PAGE_SIZE} bytes."
+        $WARN "muvm will be used to start Steam, as your system's page size is ${PAGE_SIZE} bytes."
     fi
 fi
 
 if [[ ! -e /usr/bin/FEX ]]; then
-    zenity --error \
-        --text "FEX-Emu is not installed. Steam requires FEX-Emu to run on AArch64 systems."
+    $ERR "FEX-Emu is not installed. Steam requires FEX-Emu to run on AArch64 systems."
     exit -2
 fi
 
 if [[ ${PAGE_SIZE} != 4096 ]]; then
     if [[ ! -e /usr/bin/muvm ]]; then
-        zenity --error \
-            --text "muvm is not installed. Steam requires muvm to run on AArch64 systems with page sizes other than 4096 byes. Your system's page size is ${PAGE_SIZE} bytes"
+        $ERR "muvm is not installed. Steam requires muvm to run on AArch64 systems with page sizes other than 4096 byes. Your system's page size is ${PAGE_SIZE} bytes"
         exit -2
     fi
     exec muvm /usr/bin/steam-muvm "${@}"
