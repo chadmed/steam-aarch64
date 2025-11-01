@@ -5,4 +5,4 @@ echo 'nameserver 1.1.1.1' >> /etc/resolv.conf
 export FEX_HOSTFEATURES=enableavx
 export FEX_SMALLTSCSCALE=false
 unset WAYLAND_DISPLAY
-exec FEXInterpreter /usr/bin/steam "${@}"
+exec FEX /usr/bin/steam "${@}"

@@ -20,7 +20,7 @@ if [[ ! -d "${DATA_DIR}"/Steam ]]; then
     fi
 fi
 
-if [[ ! -e /usr/bin/FEXInterpreter ]]; then
+if [[ ! -e /usr/bin/FEX ]]; then
     zenity --error \
         --text "FEX-Emu is not installed. Steam requires FEX-Emu to run on AArch64 systems."
     exit -2
@@ -34,5 +34,5 @@ if [[ ${PAGE_SIZE} != 4096 ]]; then
     fi
     exec muvm /usr/bin/steam-muvm "${@}"
 else
-    exec FEXInterpreter /usr/bin/steam
+    exec FEX /usr/bin/steam
 fi
