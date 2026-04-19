@@ -4,8 +4,8 @@ Very basic and thin launcher for Steam on AArch64 platforms.
 
 ## Dependencies
 - zenity for displaying messages to users
-- (FEX-Emu/FEX)[https://github.com/FEX-Emu/FEX]
-- (AsahiLinux/muvm)[https://github.com/AsahiLinux/muvm] on systems that do not use 4K memory pages
+- [FEX-Emu/FEX](https://github.com/FEX-Emu/FEX)
+- [AsahiLinux/muvm](https://github.com/AsahiLinux/muvm) on systems that do not use 4K memory pages
 - Steam - we are not redistributing this
 
 ## Installation
